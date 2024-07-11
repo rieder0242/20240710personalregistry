@@ -22,10 +22,10 @@
                 </div>
                 <div class="field-body">
                     <div class="field">
-                        <input class="input" type="text" placeholder="vezeték" value="{{=it.data.lastName}}">
+                        <input class="input" type="text" placeholder="vezeték">
                     </div>
                     <div class="field">
-                        <input class="input" type="text" placeholder="keresztnév"  value="{{=it.data.firstName}}">
+                        <input class="input" type="text" placeholder="keresztnév">
                     </div>
                 </div>
             </div>
@@ -35,8 +35,8 @@
             <div class="box" id="temporary">
             </div>
             <div class="buttons is-right">
-                {{? ! it.new }}<button class="button is-danger">Törlés</button>{{?}}
-                <button class="button is-success">Mentés</button>
+                {{? ! it.new }}<button class="button is-danger del">Törlés</button>{{?}}
+                <button class="button is-success save">Mentés</button>
             </div>
         </script>        
         <script type="text/x-dot-template" id="address">
@@ -61,22 +61,25 @@
                             <div class="column"><h2 class="title is-6">Elérhetőségek</h2></div>
                             <div class="column"><div class="buttons is-right"><button class="button is-info" >Új</button></div></div>
                         </div>     
-                        <div>
-                            <div class="columns">
-                                <div class="column">
-                                    <div class="select">
-                                        <select>
-                                            <option>Email</option>
-                                            <option>Telefon</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="column"><input class="input" type="text"></div>
-                                <div class="column"><div class="buttons is-right"><button class="button is-danger">Törlés</button></div></div>
-                            </div>     
+                        <div class="contactList">
+                          
                         </div>
                     </div>
                 </div>   
+        </script>        
+        <script type="text/x-dot-template" id="contact">
+              <div class="columns">
+                    <div class="column">
+                        <div class="select">
+                            <select>
+                                <option value="email">Email</option>
+                                <option value="phone">Telefon</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="column"><input class="input" type="text"></div>
+                    <div class="column"><div class="buttons is-right"><button class="button is-danger">Törlés</button></div></div>
+                </div>     
         </script>        
         <script type="text/x-dot-template" id="error">
             <h2>{{=it.message}}</h2>
