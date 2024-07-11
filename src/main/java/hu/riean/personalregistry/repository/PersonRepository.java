@@ -1,6 +1,8 @@
 package hu.riean.personalregistry.repository;
 
 import hu.riean.personalregistry.modell.Person;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.repository.CrudRepository;
 
 /**
@@ -9,5 +11,6 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface  PersonRepository extends CrudRepository<Person, Long> {
     
-    Person findById(long id);
+    Page<Person> findByLastNameContainingIgnoreCaseAndDeletedFalseOrderByLastNameAscFirstNameAsc(String fragment, PageRequest pageRequest);
+  //  Person findById(long id);
 }

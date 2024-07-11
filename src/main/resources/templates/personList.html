@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="hu">
+    <head>
+        <script type="text/javascript" src="/js/doT.min.js"></script>
+        <script type="text/javascript" src="/js/common.js"></script>
+        <script type="text/javascript" src="/js/personList.js"></script>
+        <link rel="stylesheet" href="/css/bulma.min.css" />
+    </head>
+    <body>
+        <div class="container">            
+            <h1 class="title">Személyek</h1>
+            <div class="field is-grouped">
+                <input class="input" type="text" placeholder="vezetéknév szűrő" id="filter">
+                <a href="/person/add" class="button">Új személy hozzáadása</a>
+            </div>
+            <div id="list" class="field"></div>
+            <div id="pager" class="field"></div>
+        </div>
+    </body>
+    <script type="text/x-dot-template" id="main">
+            {{? !it.page.empty}}
+                <table>
+                    {{~ it.page.content: p}}<tr><td><a href="/person/{{=p.id}}">{{=p.lastName}} {{=p.firstName}}</a></td></tr>{{~}}
+                </table>
+            {{??}}
+                Nincs a szűrésne megfelelő találatat
+            {{?}}
+    </script>
+    <script type="text/x-dot-template" id="error">
+        <h2>{{=it.message}}</h2>
+    </script>
+    <script type="text/x-dot-template" id="pager">
+        <nav class="pagination" role="navigation" aria-label="pagination">
+            {{? ! it.pager.first}}
+                <a href="#" class="pagination-previous">Előző oldal</a>
+            {{?}}
+            {{? ! it.pager.last}}
+                <a href="#" class="pagination-next">Következő oldal</a>
+            {{?}}
+            <ul class="pagination-list">
+                {{~it.pager.child: page}}
+                    <li>
+                        {{? page.separator }}
+                            <span class="pagination-ellipsis">&hellip;</span>
+                        {{??}}
+                            <a href="#" class="pagination-link{{? page.current}} is-current{{?}}" data-page="{{=page.data}}" aria-label="Goto page {{=page.name}}">{{=page.name}}</a>
+                        {{?}}
+                    </li>
+                {{~}}
+
+            </ul>
+        </nav>
+    </script>
+</html>

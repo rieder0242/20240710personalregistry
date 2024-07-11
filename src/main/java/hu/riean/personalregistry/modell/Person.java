@@ -19,6 +19,7 @@ public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
+    boolean deleted;
     String firstName;
     String lastName;
 

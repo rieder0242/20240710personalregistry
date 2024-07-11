@@ -7,6 +7,7 @@ package hu.riean.personalregistry.repository;
 import hu.riean.personalregistry.DBConfig;
 import hu.riean.personalregistry.Personalregistry;
 import hu.riean.personalregistry.modell.Person;
+import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +27,10 @@ public class PersonRepositoryTest {
     public void testFindById() {
         System.out.println("findById");
         long id = 32L;
-        Person result = rersonRepository.findById(id);
-        assertNotNull(result, "Need person entity (id="+id+") not NULL");
-        assertEquals("Szabó", result.getLastName());
+        Optional<Person> result = rersonRepository.findById(id);
+        
+        assertFalse(result.isEmpty(), "Need person entity (id="+id+") not found");
+        assertEquals("Szabó", result.get().getLastName());
     }
 
 }
