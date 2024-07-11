@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,5 +24,6 @@ public class Person {
     boolean deleted;
     String firstName;
     String lastName;
-
+    @OneToMany(mappedBy = "person")
+    private List<Address> addresses;
 }

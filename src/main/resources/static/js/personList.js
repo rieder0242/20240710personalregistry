@@ -46,10 +46,10 @@ class PersonList {
                     ev.preventDefault();
                 });
             });
-            console.log(json);
         } catch (error) {
             console.log(error);
-            document.getElementById("content").innerHTML = templates.error({message: "error"});
+            this.listE.innerHTML = templates.error({message: "error"});
+            this.pagerE.innerHTML = '';
         }
     }
 
