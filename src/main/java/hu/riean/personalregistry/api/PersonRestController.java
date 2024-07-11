@@ -32,7 +32,7 @@ public class PersonRestController {
 
     @GetMapping("/list/{page}/{fragment}")
     public Page<Person> getList(@PathVariable int page, @PathVariable String fragment) {
-        return personRepository.findByLastNameContainingIgnoreCaseAndDeletedFalseOrderByLastNameAscFirstNameAsc(fragment, PageRequest.of(page, PAGE_SIZE));
+        return personRepository.findByLastNameContainingIgnoreCaseOrderByLastNameAscFirstNameAsc(fragment, PageRequest.of(page, PAGE_SIZE));
     }
 
     @GetMapping("/{id}")

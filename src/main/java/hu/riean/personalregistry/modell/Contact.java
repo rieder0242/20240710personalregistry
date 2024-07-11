@@ -1,6 +1,9 @@
 package hu.riean.personalregistry.modell;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -16,20 +19,16 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Person {
+public class Contact {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
-    String firstName;
-    String lastName;
-    
+    int id;
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "constant_address_id", nullable = true)
-    Address constantAddress;
-
-    @ManyToOne
-    @JoinColumn(name = "temporary_address_id", nullable = true)
-    Address temporaryAddress;
-
+    @JoinColumn(name = "address_id", nullable = false)
+    Address address;
+    @Enumerated(EnumType.STRING)
+    ContactKind kind;
+    String value;
 }

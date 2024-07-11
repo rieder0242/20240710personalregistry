@@ -11,6 +11,6 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface  PersonRepository extends CrudRepository<Person, Long> {
     
-    Page<Person> findByLastNameContainingIgnoreCaseAndDeletedFalseOrderByLastNameAscFirstNameAsc(String fragment, PageRequest pageRequest);
+    Page<Person> findByLastNameContainingIgnoreCaseOrderByLastNameAscFirstNameAsc(String fragment, PageRequest pageRequest);
   //  Person findById(long id);
 }
