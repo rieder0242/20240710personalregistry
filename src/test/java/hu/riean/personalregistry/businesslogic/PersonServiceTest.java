@@ -37,9 +37,6 @@ public class PersonServiceTest {
     @Autowired
     PersonRepository personRepository;
 
-    @Autowired
-    AddressRepository addressRepository;
-
     @ParameterizedTest
     @Transactional
     @MethodSource("provideTestCreate")

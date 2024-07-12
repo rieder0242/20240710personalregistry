@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author riean
  */
 @Controller
-public class HomController {
+public class HomeController {
 
     @GetMapping("/")
     public ModelAndView home() {

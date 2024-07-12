@@ -17,7 +17,7 @@
             <div id="list" class="field"></div>
             <div id="pager" class="field"></div>
         </div>
-        <div th:replace="footer::footer"></div>
+        <div th:replace="~{footer::footer}"></div>
     </body>
     <script type="text/x-dot-template" id="main">
             {{? !it.page.empty}}
