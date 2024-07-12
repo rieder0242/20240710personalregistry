@@ -43,3 +43,20 @@ function pager(pos, max) {
     section(max - radiusEnd - 1 , max);
     return result;
 }
+
+class Notify {
+    constructor(msg, clazz) {
+        let div = document.createElement('div');
+        div.innerHTML = templates.notify();
+        this.element = div.firstElementChild;
+        document.querySelector('.notifycontainer').appendChild(this.element);
+        this.element.querySelector('p').innerText = msg;
+        this.element.classList.add('is-'+clazz);
+        this.element.querySelector('.delete').addEventListener('click',()=>this.close());
+        setTimeout(()=>this.close(), 5000);
+        
+    }
+    close() {
+        this.element.remove();
+    }
+}

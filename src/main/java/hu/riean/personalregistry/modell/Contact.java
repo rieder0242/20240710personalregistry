@@ -22,8 +22,8 @@ import lombok.Setter;
 public class Contact {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "address_id", nullable = false)

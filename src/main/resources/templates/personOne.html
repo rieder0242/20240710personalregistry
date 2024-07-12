@@ -9,12 +9,15 @@
     <body>
         <div class="container mt-4 mb-4">
             <h1 class="title">Személyek</h1>
-
+            <div class="notifycontainer"></div>
             <div id="person" class="block"></div>
-
         </div>
+            
 
         <input id="id" type="hidden" th:value="${id}"/>
+        <div th:replace="footer::footer"></div>
+                
+    </body>
         <script type="text/x-dot-template" id="person">
             <div class="field is-horizontal">
                 <div class="field-label is-normal">
@@ -41,7 +44,7 @@
         </script>        
         <script type="text/x-dot-template" id="address">
                 <div class="columns">
-                    <div class="column"><h2 class="title is-5">{{? it.kind == 'constant'}}Állandó{{??}}Ideiglenes{{?}} lakcím</h2></div>
+                    <div class="column"><h2 class="title is-5">{{? it.constant}}Állandó{{??}}Ideiglenes{{?}} lakcím</h2></div>
                     <div class="column"><label class="checkbox"><input type="checkbox" /> létezik</label></div>
                 </div>   
                 <div class="hider">   
@@ -84,5 +87,11 @@
         <script type="text/x-dot-template" id="error">
             <h2>{{=it.message}}</h2>
         </script>              
-    </body>
+        <script type="text/x-dot-template" id="notify">
+            <div class="notification block mb-4 is-light">
+                <button class="delete"></button>
+                <p/>
+            </div>
+
+        </script>              
 </html>        

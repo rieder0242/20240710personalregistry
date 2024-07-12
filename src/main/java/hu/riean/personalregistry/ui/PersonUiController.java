@@ -16,14 +16,14 @@ import org.springframework.web.servlet.ModelAndView;
 public class PersonUiController {
 
     @GetMapping("/list")
-    public ModelAndView getAll() throws IOException {
+    public ModelAndView getAll() {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("personList");
         return mv;
     }
 
     @GetMapping("/add")
-    public ModelAndView add() throws IOException {
+    public ModelAndView add() {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("personOne");
         mv.addObject("id", null);
@@ -32,7 +32,7 @@ public class PersonUiController {
     }
 
     @GetMapping("/{id}")
-    public ModelAndView one(@PathVariable long id) throws IOException {
+    public ModelAndView one(@PathVariable long id) {
         ModelAndView mv = new ModelAndView();
         mv.addObject("id", id);
         mv.addObject("add", false);

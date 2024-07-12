@@ -1,0 +1,22 @@
+{
+    "lastName": "Alapa",
+    "firstName": "Alpár",
+    "constantAddress": {
+        "zipCode": "1234",
+        "settlement": "Budapest",
+        "address": "Zsák utca 4.",
+        "contacts": [
+            {
+                "id": null,
+                "value": "alap.alpar@spam.com",
+                "kind": "email"
+            },
+            {
+                "id": null,
+                "value": "+36 20 123-45-67",
+                "kind": "phone"
+            }
+        ]
+    },
+    "temporaryAddress": null
+}

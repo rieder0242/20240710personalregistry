@@ -1,0 +1,46 @@
+[
+    {
+        "lastName": "Teszt",
+        "firstName": "Elek",
+        "constantAddress": {
+            "zipCode": "7720",
+            "settlement": "Martonfa",
+            "address": "Próba út 1.",
+            "contacts": [
+                {
+                    "id": null,
+                    "value": "teszt.elek@spam.com",
+                    "kind": "email"
+                },
+                {
+                    "id": null,
+                    "value": "+36 30 123-45-67",
+                    "kind": "phone"
+                }
+            ]
+        },
+        "temporaryAddress": {
+            "zipCode": "7724",
+            "settlement": "Feked",
+            "address": "Teszt dűlő 2/b",
+            "contacts": [
+                {
+                    "id": null,
+                    "value": "elekteszt69@gmail.com",
+                    "kind": "email"
+                },
+                {
+                    "id": null,
+                    "value": "+36  72 123-456",
+                    "kind": "phone"
+                }
+            ]
+        }
+    },
+    {
+        "lastName": "Teszt",
+        "firstName": "Alfonz",
+        "constantAddress": null,
+        "temporaryAddress": null
+    }    
+]

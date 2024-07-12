@@ -11,6 +11,7 @@ class PersonList {
         filterE.addEventListener("input", (e) => {
             console.log(filterE.value);
             this.filter = filterE.value;
+            this.page = 0;
             this.getPage();
         });
     }

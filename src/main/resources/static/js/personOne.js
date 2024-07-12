@@ -8,11 +8,12 @@ class Contact {
         div.innerHTML = templates.contact({data: value});
         this.element = div.firstElementChild;
         element.appendChild(this.element);
-        this.element.querySelector("button").addEventListener("click", (e) =>this.delete());
+        this.element.querySelector("button").addEventListener("click", (e) => this.delete());
         this.value = this.element.querySelector('[type="text"]');
         this.kind = this.element.querySelector('select');
 
         this.setValue(value);
+        this.id = value.id;
     }
     setValue(value) {
         this.value.value = value.value;
@@ -20,11 +21,12 @@ class Contact {
     }
     getValue() {
         return {
+            id: this.id,
             value: this.value.value,
             kind: this.kind.value
         };
     }
-    delete(){
+    delete() {
         this.element.remove();
         this.parent.removeChild(this);
     }
@@ -36,6 +38,7 @@ class ContactList {
         this.element = element;
         element.parentElement.querySelector("button").addEventListener("click", (e) => {
             this.addChild({
+                id: null,
                 kind: 'email',
                 value: ''
             });
@@ -47,10 +50,9 @@ class ContactList {
     addChild(v) {
         this.children.push(new Contact(v, this.element, this));
     }
-    removeChild(child){
+    removeChild(child) {
         const index = this.children.indexOf(child);
         this.children.splice(index, 1);
-        console.log(this.children);
     }
     getValue() {
         let value = [];
@@ -62,12 +64,12 @@ class ContactList {
 }
 
 class Address {
-    constructor(value, element) {
+    constructor(value, element, constant) {
         let isNew = value === null;
         if (value === null) {
             value = this.getEmptyValue();
         }
-        element.innerHTML = templates.address({data: value});
+        element.innerHTML = templates.address({data: value, constant: constant});
         this.checkbox = element.querySelector('[type="checkbox"]');
         this.hider = element.querySelector('.hider');
         [this.zipCode, this.settlement, this.address] = element.querySelectorAll('[type="text"]');
@@ -129,7 +131,9 @@ class PersonOne {
             if (this.new) {
                 json = {
                     firstName: '',
-                    lastName: ''
+                    lastName: '',
+                    constantAddress: null,
+                    temporaryAddress: null
                 };
             } else {
                 const url = "/api/person/" + this.id;
@@ -149,14 +153,16 @@ class PersonOne {
 
             [this.lastName, this.firstName] = this.personE.querySelectorAll('[type="text"]');
 
-            this.constant = new Address(json.constantAddress, document.getElementById('constant'));
-            this.temporary = new Address(json.temporaryAddress, document.getElementById('temporary'));
+            this.constantAddress = new Address(json.constantAddress, document.getElementById('constant'), true);
+            this.temporaryAddress = new Address(json.temporaryAddress, document.getElementById('temporary'), false);
 
             this.setValue(json);
 
         } catch (error) {
             console.log(error);
-            document.getElementById("content").innerHTML = templates.error({message: "error"});
+            new Notify('Hiba a betöltés közben!', 'danger');
+
+
         }
     }
     setValue(value) {
@@ -167,21 +173,54 @@ class PersonOne {
         return {
             lastName: this.lastName.value,
             firstName: this.firstName.value,
-            constant: this.constant.getValue(),
-            temporary: this.temporary.getValue()
-        }
+            constantAddress: this.constantAddress.getValue(),
+            temporaryAddress: this.temporaryAddress.getValue()
+        };
     }
     async save() {
         let value = this.getValue();
-        console.log(value);
+        console.log(JSON.stringify(value));
+        let method, url;
+        if (this.new) {
+            url = '/api/person'
+            method = 'POST';
+        } else {
+            url = '/api/person/' + this.id;
+            method = 'PUT';
+        }
+        let requestOptions = {
+            method: method,
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(value)
+        };
+        fetch(url, requestOptions).then(
+                response => {
+                    if (response.ok) {
+                        new Notify('Sikeres mentés!', 'info');
+                    } else {
+                        new Notify('Hiba a mentés közben!', 'danger');
+                    }
+                }
+        );
     }
     async delete() {
 
+        fetch('/api/person/' + this.id, {method: 'DELETE'}).then(
+                response => {
+                    if (response.ok) {
+                        new Notify('Sikeres törlés!', 'info');
+                        window.location.href = "/person/list";
+                    } else {
+                        new Notify('Hiba a törlés közben!', 'danger');
+                    }
+                }
+        );
     }
 
 }
 
 addEventListener("DOMContentLoaded", (event) => {
     new PersonOne();
+
 });
 
